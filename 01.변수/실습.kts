@@ -7,7 +7,7 @@ var changeYes = 100
 // 초기화 하지 않은 경우
 // var changeYes
 // changeYes = 100
-// error: property must be initialized or be abstract (실습.kts: 6:1)
+// error: property must be initialized or be abstract (실습_for.kts: 6:1)
 println(changeYes)
 
 changeYes = 200
