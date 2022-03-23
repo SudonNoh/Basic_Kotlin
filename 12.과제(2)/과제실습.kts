@@ -179,6 +179,30 @@ fun gugudan(num: Int): MutableList<Int> {
 var answer = gugudan(5)
 println(answer)
 
-// 10. 숫자 리스트 두개를 넣어주면 짝수 홀수로 분리된 Map을 만드는 함수를 만드시오
+// 10. 숫자 리스트 두 개를 넣어주면 짝수 홀수로 분리된 Map을 만드는 함수를 만드시오
 //     (Map의 키는 짝수의 경우 "짝수", 홀수의 경우 "홀수" 한다)
 
+fun makeMap(list1: List<Int>, list2: List<Int>): MutableMap<String, MutableList<Int>> {
+    val odd = mutableListOf<Int>()
+    val even = mutableListOf<Int>()
+    val listOfList = listOf<List<Int>>(list1, list2)
+    for (i in listOfList) {
+        for (j in i) {
+            if (j % 2 == 0) {
+                even.add(j)
+            } else {
+                odd.add(j)
+            }
+        }
+    }
+    val result =
+        mutableMapOf<String, MutableList<Int>>("짝수" to odd, "홀수" to even)
+    return result
+}
+
+println(
+    makeMap(
+        listOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+        listOf<Int>(100, 101, 102, 103, 104, 105)
+    )
+)
