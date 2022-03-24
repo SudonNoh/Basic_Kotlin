@@ -20,7 +20,7 @@ fun sumNumbers(numbers: Int): Int {
 // while 이용
 fun sumNumbers2(numbers: Int): Int {
     var i = 0
-    while (i == numbers) {
+    while (i < numbers) {
         i++
     }
     return i
@@ -59,6 +59,15 @@ fun sevenMultiSum2(number: Int): Int {
         return sevenNum
     }
 }
+
+fun sum7s(): Int {
+    var sum: Int = 0
+    for (i in 0..100) {
+        if (i % 7 == 0) sum += i
+    }
+    return sum
+}
+
 println("-1 :" + sevenMultiSum2(-1))
 println("100 :" + sevenMultiSum2(100))
 println("101 :" + sevenMultiSum2(101))
@@ -81,7 +90,7 @@ to100(20)
 val examScores = arrayOf<Int>(70, 71, 72, 77, 78, 79, 80, 82, 90, 99)
 
 fun passOrFail(array: Array<Int>): Array<Boolean> {
-    var result = Array(10, { false })
+    var result = Array(array.size, { false })
     for ((index, score) in array.withIndex()) {
         if (score >= 80) {
             result.set(index, true)
@@ -95,13 +104,28 @@ for (i in examList) {
     println(i)
 }
 
+fun checkPassOrNot(examScores: List<Int>): BooleanArray {
+    val resultArray = BooleanArray(examScores.size, { false })
+    examScores.forEachIndexed { index, score ->
+        if (score >= 80) resultArray[index] = true
+    }
+    return resultArray
+}
+
+//val result = checkPassOrNot(listOf<Int>(70, 71, 72, 77, 78, 79, 80, 82, 90, 99))
+//result.forEach {
+//    println(it)
+//}
+
 // 6. 두개의 주사위를 던졌을때, 눈의 합이 6이 되는 모든 경우의 수를 출력하는 함수를 만드시오
 // -> [[3,3],[1,5],...]
 fun diceCombination(): Unit {
     var combis = mutableListOf<List<Int>>()
     for (i in 1..6) {
         for (j in 1..6) {
-            combis.add(listOf<Int>(i, j))
+            if (i + j == 6) {
+                combis.add(listOf<Int>(i, j))
+            }
         }
     }
     println(combis)
@@ -119,15 +143,11 @@ diceCombination()
 
 fun eat(total: Int, current: Int): Unit {
     var i = current
-    if (total < current) {
-        println("조건이 맞지 않습니다.")
-    } else {
-        do {
-            println("밥을 먹었다")
-            i++
-        } while (total > i)
-        println("배가 부르다")
-    }
+    do {
+        println("밥을 먹었다")
+        i++
+    } while (total > i)
+    println("배가 부르다")
 }
 
 eat(10, 10)
@@ -176,7 +196,7 @@ fun gugudan(num: Int): MutableList<Int> {
     return result
 }
 
-var answer = gugudan(5)
+var answer = gugudan(7)
 println(answer)
 
 // 10. 숫자 리스트 두 개를 넣어주면 짝수 홀수로 분리된 Map을 만드는 함수를 만드시오
